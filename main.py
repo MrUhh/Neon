@@ -10,6 +10,9 @@ Neon = Robot()
 obstacles = [(random.randint(-5,5),random.randint(-5,5)),(random.randint(-5,5),random.randint(-5,5)),(random.randint(-5,5),random.randint(-5,5))]
 charge = [(-3,-4),(-2,3),(3,-2)]
 import pygame
+pygame.init()
+screen = pygame.display.set_mode((1000,800))
+pygame.display.set_caption("Neon Virtual Screen")
 def move_east(self):
     if self.x >= 5:
         print()
@@ -129,4 +132,24 @@ def move_command():
             print()
         else:
             print('Invalid command! Try again')
-move_command()
+#move_command()
+run = True
+Colour_Neon = (0,255,255)
+while run:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_w:
+                move_north(Neon)
+            if event.key == pygame.K_s:
+                move_south(Neon)
+            if event.key == pygame.K_a:
+                move_west(Neon)
+            if event.key == pygame.K_d:
+                move_east(Neon)
+    screen.fill((0,0,0))
+    pygame.draw.rect(screen, (255,0,0), (0,0,1000,1000), 5)
+    pygame.draw.rect(screen, Colour_Neon, (Neon.x * 100 + 500, Neon.y * -100 + 400, 50, 50))
+    pygame.display.update()
+pygame.quit()
